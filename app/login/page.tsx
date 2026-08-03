@@ -1,15 +1,41 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Eye, EyeOff } from "lucide-react";
+import { useLoginMutation } from "@/features/auth/authApi";
+import { setCredentials } from "@/features/auth/authSlice";
 
 export default function LoginPage() {
-  const [useAlias, setUseAlias] = useState(true);
+  // const [useAlias, setUseAlias] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const result = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ user: result.user, token: result.token }));
+      localStorage.setItem("token", result.token);
+      router.push("/dashboard");
+        } catch (err) {
+      const message =
+       typeof err === 'object' && err !== null && 'data' in err
+        ? (err as { data?: { error?: string } }).data?.error
+        : undefined;
+        setError(message || "Invalid email or password");
+        }
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -54,25 +80,23 @@ export default function LoginPage() {
             Sign in to your factory
           </p>
 
-          <div className="flex items-center gap-2 mb-6">
-            <Switch checked={useAlias} onCheckedChange={setUseAlias} />
-            <Label className="cursor-pointer" onClick={() => setUseAlias(!useAlias)}>
-              Use Organisation Alias
-            </Label>
-          </div>
-
-          <div className="space-y-4">
-            {useAlias && (
-              <Input placeholder="Organisation alias" />
-            )}
-
-            <Input placeholder="User ID" />
+ <form onSubmit={handleSubmit} className="space-y-4">
+            <Input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
               <button
                 type="button"
@@ -82,11 +106,17 @@ export default function LoginPage() {
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
-          </div>
 
-          <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
-            Sign in
-          </Button>
+            {error && <p className="text-sm text-red-600">{error}</p>}
+
+            <Button
+              type="submit"
+              className="w-full mt-2 bg-purple-600 hover:bg-purple-700"
+              disabled={isLoading}
+            >
+              {isLoading ? "Signing in..." : "Sign in"}
+            </Button>
+          </form>
 
           <p className="text-center text-sm text-purple-600 mt-4 cursor-pointer hover:underline">
             Forgot password?
