@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { Plus, SlidersHorizontal, MoreVertical } from "lucide-react";
 import { ConsumptionWidget } from "@/components/ConsumptionWidget";
 import { cn } from "@/lib/utils";
 
@@ -16,9 +17,33 @@ const mockViews = [
 
 export default function DashboardPage() {
   const [activeId, setActiveId] = useState(mockViews[0].id);
+
   return (
     <div className="p-6">
+      <div className="flex items-center justify-between mb-4">
       <h1 className="text-2xl font-semibold mb-4">Views</h1>
+        <div className="flex items-center gap-2">
+          <button
+            className="p-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+            title="Filter"
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+          </button>
+          <button
+            className="p-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors"
+            title="More options"
+          >
+            <MoreVertical className="h-4 w-4" />
+          </button>
+          <button
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            <Plus className="h-4 w-4" />
+            Add View
+          </button>
+        </div>
+      </div>
+
       <div className="flex gap-2 border-b pb-2 mb-4">
         {mockViews.map((v) => {
           const isActive = v.id === activeId;
