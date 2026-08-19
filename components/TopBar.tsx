@@ -3,6 +3,7 @@
 import { Bell, Search, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ThemeAccentPopover } from "@/components/ThemeAccentPopover";
 
 export default function TopBar() {
   return (
@@ -26,6 +27,8 @@ export default function TopBar() {
         >
           <Bell className="h-5 w-5 text-gray-600" />
         </button>
+
+        <ThemeAccentPopover />
 
         <button
           className="p-2 rounded-full hover:bg-gray-100 transition-colors"
