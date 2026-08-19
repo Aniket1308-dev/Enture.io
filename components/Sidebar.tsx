@@ -15,7 +15,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-screen w-16 flex-col items-center justify-between border-r border-purple-800/20 bg-purple-700 py-4">
+ <aside className="flex h-screen w-16 flex-col items-center justify-between border-r border-sidebar-border bg-sidebar py-4">
       {/* Top: nav icons */}
       <nav className="flex flex-col items-center gap-1">
         {navItems.map(({ href, label, icon: Icon }) => {
@@ -26,14 +26,14 @@ export function Sidebar() {
               href={href}
               title={label}
               className={cn(
-                "group relative flex h-12 w-12 flex-col items-center justify-center gap-0.5 rounded-lg text-purple-200 transition-colors",
+                "group relative flex h-12 w-12 flex-col items-center justify-center gap-0.5 rounded-lg text-sidebar-foreground/70 transition-colors",
                 isActive
-                  ? "bg-white/15 text-white"
-                  : "hover:bg-white/10 hover:text-white"
+                  ? "bg-sidebar-accent text-sidebar-foreground"
+                  : "hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
               )}
             >
               {isActive && (
-                <span className="absolute left-0 top-1/2 h-6 w-0.5 -translate-y-1/2 rounded-r bg-white" />
+                <span className="absolute left-0 top-1/2 h-6 w-0.5 -translate-y-1/2 rounded-r bg-sidebar-foreground" />
               )}
               <Icon className="h-5 w-5" strokeWidth={1.75} />
               <span className="text-[9px] leading-none">{label.split(" ")[0]}</span>
@@ -43,7 +43,7 @@ export function Sidebar() {
       </nav>
 
       {/* Bottom: version tag */}
-      <span className="text-[10px] font-medium text-purple-300">1.5.0</span>
+        <span className="text-[10px] font-medium text-sidebar-foreground/60">1.5.0</span>
     </aside>
   );
 }

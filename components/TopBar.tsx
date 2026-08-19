@@ -38,7 +38,7 @@ export default function TopBar() {
         </button>
 
         <Avatar className="h-9 w-9 cursor-pointer">
-          <AvatarFallback className="bg-purple-600 text-white text-sm font-medium">
+          <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
             N
           </AvatarFallback>
         </Avatar>
