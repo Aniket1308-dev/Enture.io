@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Plus, SlidersHorizontal, MoreVertical } from "lucide-react";
 import { ConsumptionWidget } from "@/components/ConsumptionWidget";
 import { cn } from "@/lib/utils";
+import { ParamTestWidget } from "@/components/ParamTestWidget";
+
 
 const mockViews = [
   { id: 1, name: "EMS View", type: "table" },
@@ -66,7 +68,8 @@ export default function DashboardPage() {
         <div className="mt-6 grid grid-cols-3 gap-4">
            <ConsumptionWidget />
            {/* remaining 5 widgets will go here in later steps */}
-        </div>    
+        </div>   
+        <ParamTestWidget /> 
       {/* selected view content goes here later */}
     </div>
   );
