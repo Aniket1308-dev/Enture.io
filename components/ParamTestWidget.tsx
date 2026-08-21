@@ -25,13 +25,13 @@ export function ParamTestWidget() {
           <AreaChart data={mockData} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id="paramFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity={0.25} />
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity={0} />
+                <stop offset="0%" stopColor="var(--primary)" stopOpacity={0.25} />
+                <stop offset="100%" stopColor="var(--primary)" stopOpacity={0} />
               </linearGradient>
             </defs>
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+              tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
               axisLine={false}
               tickLine={false}
             />
@@ -40,15 +40,15 @@ export function ParamTestWidget() {
               contentStyle={{
                 fontSize: 12,
                 borderRadius: 8,
-                border: "1px solid hsl(var(--border))",
-                background: "hsl(var(--card))",
+                border: "1px solid var(--border)",
+                background: "var(--card)",
               }}
-              labelStyle={{ color: "hsl(var(--foreground))" }}
+              labelStyle={{ color: "var(--foreground)" }}
             />
             <Area
               type="monotone"
               dataKey="value"
-              stroke="hsl(var(--primary))"
+              stroke="var(--primary)"
               strokeWidth={2}
               fill="url(#paramFill)"
             />
