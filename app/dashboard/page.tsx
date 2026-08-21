@@ -6,6 +6,7 @@ import { Plus, SlidersHorizontal, MoreVertical } from "lucide-react";
 import { ConsumptionWidget } from "@/components/ConsumptionWidget";
 import { cn } from "@/lib/utils";
 import { ParamTestWidget } from "@/components/ParamTestWidget";
+import { ParamBarWidget } from "@/components/ParamBarWidget";
 
 
 const mockViews = [
@@ -70,6 +71,7 @@ export default function DashboardPage() {
            {/* remaining 5 widgets will go here in later steps */}
         </div>   
         <ParamTestWidget /> 
+        <ParamBarWidget />
       {/* selected view content goes here later */}
     </div>
   );
