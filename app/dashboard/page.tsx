@@ -9,6 +9,7 @@ import { ParamTestWidget } from "@/components/ParamTestWidget";
 import { ParamBarWidget } from "@/components/ParamBarWidget";
 import { EmsSummaryWidget } from "@/components/EmsSummaryWidget";
 import { TableViewWidget } from "@/components/TableViewWidget";
+import { SldDiagramWidget } from "@/components/SldDiagramWidget";
 
 
 const mockViews = [
@@ -76,6 +77,7 @@ export default function DashboardPage() {
         <ParamBarWidget />
         <EmsSummaryWidget />
         <TableViewWidget />
+        <SldDiagramWidget />
       {/* selected view content goes here later */}
     </div>
   );
