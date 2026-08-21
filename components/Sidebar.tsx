@@ -15,35 +15,46 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
- <aside className="flex h-screen w-16 flex-col items-center justify-between border-r border-sidebar-border bg-sidebar py-4">
-      {/* Top: nav icons */}
-      <nav className="flex flex-col items-center gap-1">
-        {navItems.map(({ href, label, icon: Icon }) => {
-          const isActive = pathname === href || pathname.startsWith(href + "/");
-          return (
-            <Link
-              key={href}
-              href={href}
-              title={label}
-              className={cn(
-                "group relative flex h-12 w-12 flex-col items-center justify-center gap-0.5 rounded-lg text-sidebar-foreground/70 transition-colors",
-                isActive
-                  ? "bg-sidebar-accent text-sidebar-foreground"
-                  : "hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
-              )}
-            >
-              {isActive && (
-                <span className="absolute left-0 top-1/2 h-6 w-0.5 -translate-y-1/2 rounded-r bg-sidebar-foreground" />
-              )}
-              <Icon className="h-5 w-5" strokeWidth={1.75} />
-              <span className="text-[9px] leading-none">{label.split(" ")[0]}</span>
-            </Link>
-          );
-        })}
-      </nav>
+    <aside className="flex h-screen w-14 flex-col items-center justify-between border-r border-sidebar-border bg-sidebar py-4">
+      <div className="flex flex-col items-center gap-4">
+        {/* Brand mark */}
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+          <Zap className="h-4 w-4 text-primary-foreground" strokeWidth={2} />
+        </div>
 
-      {/* Bottom: version tag */}
-        <span className="text-[10px] font-medium text-sidebar-foreground/60">1.5.0</span>
+        {/* Nav icons */}
+        <nav className="flex flex-col items-center gap-1">
+          {navItems.map(({ href, label, icon: Icon }) => {
+            const isActive = pathname === href || pathname.startsWith(href + "/");
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={cn(
+                  "group relative flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
+                  isActive
+                    ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                    : "text-sidebar-foreground/60 hover:bg-sidebar-accent/60 hover:text-sidebar-foreground"
+                )}
+              >
+                <Icon className="h-4.5 w-4.5" strokeWidth={1.75} />
+
+                {/* Tooltip on hover */}
+                <span
+                  className="pointer-events-none absolute left-full ml-2 whitespace-nowrap rounded-md bg-popover px-2 py-1 text-xs font-medium text-popover-foreground opacity-0 shadow-md transition-opacity group-hover:opacity-100 z-50"
+                >
+                  {label}
+                </span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* Version tag */}
+      <span className="text-[9px] font-medium text-sidebar-foreground/40">
+        1.5.0
+      </span>
     </aside>
   );
 }
