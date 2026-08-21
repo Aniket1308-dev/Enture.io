@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { Check, Monitor, Moon, Sun } from "lucide-react"
 import {
@@ -19,9 +20,17 @@ const themeOptions = [
 export function ThemeAccentPopover() {
   const { theme, setTheme } = useTheme()
   const { accentId, setAccentColor, accentColors } = useAccentColor()
+  const [mounted, setMounted] = useState(false)
 
-  const currentSwatch =
-    accentColors.find((c) => c.id === accentId)?.swatch ?? "#a855f7"
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true)
+  }, [])
+
+  const currentSwatch = mounted
+    ? accentColors.find((c) => c.id === accentId)?.swatch ?? "#a855f7"
+    : "#a855f7"
+
 
   return (
     <Popover>
