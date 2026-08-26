@@ -1,0 +1,8 @@
+"use client";
+
+import { io, Socket } from "socket.io-client";
+
+// Singleton socket instance — created once, reused everywhere
+export const socket: Socket = io("http://localhost:4000", {
+  autoConnect: false, // we'll connect explicitly from SocketProvider
+});
