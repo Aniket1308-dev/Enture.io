@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Sidebar } from "@/components/Sidebar";
 import TopBar from "@/components/TopBar";
+import { SocketProvider } from "@/context/SocketProvider";
 
 
 const geistSans = Geist({
@@ -37,13 +38,15 @@ export default function RootLayout({
           disableTransitionOnChange
         >
         <Providers>
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <div className="flex-1 flex flex-col overflow-y-auto">
-              <TopBar />
-            <main className="flex-1 overflow-y-auto">{children}</main>
+          <SocketProvider>
+            <div className="flex min-h-screen">
+              <Sidebar />
+              <div className="flex-1 flex flex-col overflow-y-auto">
+                <TopBar />
+              <main className="flex-1 overflow-y-auto">{children}</main>
+              </div>
             </div>
-          </div>
+          </SocketProvider>
         </Providers>
         </ThemeProvider>
       </body>
