@@ -5,10 +5,12 @@ import { Bell, Search, Settings, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ThemeAccentPopover } from "@/components/ThemeAccentPopover";
+import { useSocketData } from "@/context/SocketProvider";
 
 export default function TopBar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const { isConnected } = useSocketData();
 
   useEffect(() => {
     if (searchOpen) {
@@ -26,13 +28,17 @@ export default function TopBar() {
 
       {/* Right: live status + search + icons + avatar */}
       <div className="flex items-center gap-3">
-        {/* TODO (Step 12 / socket.io): swap this hardcoded pill for a real
-            connection-status indicator once the socket connects. e.g.
-            green + "Live" when connected, gray + "Offline" when not. */}
-        <div className="flex items-center gap-1.5 text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40 rounded-md px-2.5 py-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-          Live
-        </div>
+        {isConnected ? (
+          <div className="flex items-center gap-1.5 text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/40 rounded-md px-2.5 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+            Live
+          </div>
+        ) : (
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground bg-muted rounded-md px-2.5 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60" />
+            Offline
+          </div>
+        )}
 
         {searchOpen ? (
           <div className="relative w-56">
