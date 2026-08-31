@@ -1,12 +1,25 @@
-import { WidgetCard } from "@/components/ui/WidgetCard";
+"use client";
 
-const metrics = [
+import { WidgetCard } from "@/components/ui/WidgetCard";
+import { useSocketData } from "@/context/SocketProvider";
+
+const mockMetrics = [
   { label: "Efficiency", value: "92", unit: "%" },
   { label: "Uptime", value: "99.4", unit: "%" },
   { label: "Active Alerts", value: "2", unit: "" },
 ];
 
 export function EmsSummaryWidget() {
+  const { emsSummary } = useSocketData();
+
+  const metrics = emsSummary
+    ? [
+        { label: "Efficiency", value: emsSummary.efficiency.toString(), unit: "%" },
+        { label: "Uptime", value: emsSummary.uptime.toString(), unit: "%" },
+        { label: "Active Alerts", value: emsSummary.activeAlerts.toString(), unit: "" },
+      ]
+    : mockMetrics;
+
   return (
     <WidgetCard title="EMS Summary" dotColor="bg-primary">
       <div className="grid grid-cols-3 gap-4">

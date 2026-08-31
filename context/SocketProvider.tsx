@@ -14,22 +14,31 @@ interface ParameterPoint {
   value: number;
 }
 
+interface EmsSummaryData {
+  efficiency: number;
+  uptime: number;
+  activeAlerts: number;
+}
+
 interface SocketContextValue {
   isConnected: boolean;
   consumption: ConsumptionData | null;
   parameterTrend: ParameterPoint[];
+  emsSummary: EmsSummaryData | null;  
 }
 
 const SocketContext = createContext<SocketContextValue>({
   isConnected: false,
   consumption: null,
   parameterTrend: [],
+  emsSummary: null,  
 });
 
 export function SocketProvider({ children }: { children: ReactNode }) {
   const [isConnected, setIsConnected] = useState(false);
   const [consumption, setConsumption] = useState<ConsumptionData | null>(null);
   const [parameterTrend, setParameterTrend] = useState<ParameterPoint[]>([]);
+  const [emsSummary, setEmsSummary] = useState<EmsSummaryData | null>(null);  
 
   useEffect(() => {
     socket.connect();
@@ -46,23 +55,28 @@ export function SocketProvider({ children }: { children: ReactNode }) {
     function onParameterTrend(data: ParameterPoint[]) {
       setParameterTrend(data);
     }
+    function onEmsSummary(data: EmsSummaryData) {
+      setEmsSummary(data);
+    }
 
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
     socket.on("consumption:update", onConsumptionUpdate);
     socket.on("parameter:trend", onParameterTrend);
+    socket.on("ems:summary", onEmsSummary);    
 
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
       socket.off("consumption:update", onConsumptionUpdate);
       socket.off("parameter:trend", onParameterTrend);
+      socket.off("ems:summary", onEmsSummary);      
       socket.disconnect();
     };
   }, []);
 
   return (
-    <SocketContext.Provider value={{ isConnected, consumption, parameterTrend }}>
+    <SocketContext.Provider value={{ isConnected, consumption, parameterTrend, emsSummary }}>
       {children}
     </SocketContext.Provider>
   );
