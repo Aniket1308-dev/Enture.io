@@ -1,6 +1,9 @@
-import { WidgetCard } from "@/components/ui/WidgetCard";
+"use client";
 
-const devices = [
+import { WidgetCard } from "@/components/ui/WidgetCard";
+import { useSocketData } from "@/context/SocketProvider";
+
+const mockDevices = [
   { name: "Meter 01", type: "Energy", status: "Active", value: "4,281 kWh" },
   { name: "Meter 02", type: "Energy", status: "Active", value: "2,110 kWh" },
   { name: "Sensor A1", type: "Temperature", status: "Active", value: "24.5 °C" },
@@ -9,6 +12,7 @@ const devices = [
   { name: "Inverter 02", type: "Solar", status: "Offline", value: "—" },
 ];
 
+
 const statusStyles: Record<string, string> = {
   Active: "text-green-600 bg-green-50",
   Idle: "text-yellow-600 bg-yellow-50",
@@ -16,6 +20,10 @@ const statusStyles: Record<string, string> = {
 };
 
 export function TableViewWidget() {
+  const { devicesTable } = useSocketData();
+
+  const devices = devicesTable.length > 0 ? devicesTable : mockDevices;  
+
   return (
     <WidgetCard title="Devices" dotColor="bg-primary" span={2}>
       <table className="w-full text-sm">
