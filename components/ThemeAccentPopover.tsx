@@ -31,19 +31,18 @@ export function ThemeAccentPopover() {
     ? accentColors.find((c) => c.id === accentId)?.swatch ?? "#a855f7"
     : "#a855f7"
 
-
   return (
     <Popover>
       <PopoverTrigger asChild>
         <button
           type="button"
-          className="h-6 w-6 rounded-full border border-border transition-transform hover:scale-110"
+          className="h-6 w-6 rounded-lg border border-border shadow-sm transition-transform hover:scale-110"
           style={{ backgroundColor: currentSwatch }}
           aria-label="Theme and accent color settings"
         />
       </PopoverTrigger>
       <PopoverContent align="end" className="w-72 p-4">
-        <div className="space-y-4">
+        <div className="space-y-5">
           <div>
             <p className="mb-2 text-sm font-medium text-foreground">Theme</p>
             <div className="grid grid-cols-3 gap-2">
@@ -67,24 +66,40 @@ export function ThemeAccentPopover() {
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-foreground">
+            <p className="mb-3 text-sm font-medium text-foreground">
               Accent color
             </p>
-            <div className="grid grid-cols-4 gap-3">
-              {accentColors.map((color) => (
-                <button
-                  key={color.id}
-                  type="button"
-                  onClick={() => setAccentColor(color.id)}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-border transition-transform hover:scale-110"
-                  style={{ backgroundColor: color.swatch }}
-                  aria-label={color.label}
-                >
-                  {accentId === color.id && (
-                    <Check className="h-4 w-4 text-white drop-shadow" />
-                  )}
-                </button>
-              ))}
+            <div className="grid grid-cols-4 gap-4">
+              {accentColors.map((color) => {
+                const isSelected = accentId === color.id
+                return (
+                  <button
+                    key={color.id}
+                    type="button"
+                    onClick={() => setAccentColor(color.id)}
+                    title={color.label}
+                    aria-label={color.label}
+                    aria-pressed={isSelected}
+                    className={cn(
+                      "flex h-9 w-9 items-center justify-center rounded-full border border-border/50 shadow-sm transition-all duration-150 hover:scale-110 hover:shadow-md",
+                      isSelected &&
+                        "ring-2 ring-offset-2 ring-offset-popover scale-105"
+                    )}
+                    style={{
+                      backgroundColor: color.swatch,
+                      ...(isSelected
+                        ? ({ "--tw-ring-color": color.swatch } as React.CSSProperties)
+                        : {}),
+                    }}
+                  >
+                    {isSelected && (
+                      <span className="flex h-4 w-4 items-center justify-center rounded-full bg-black/20">
+                        <Check className="h-3 w-3 text-white" strokeWidth={3} />
+                      </span>
+                    )}
+                  </button>
+                )
+              })}
             </div>
           </div>
 
