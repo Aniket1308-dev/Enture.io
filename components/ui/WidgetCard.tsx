@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 interface WidgetCardProps {
   title: string;
   dotColor?: string; // Tailwind bg class, e.g. "bg-primary", "bg-green-500"
+  accentColor?: string; // Tailwind border-l class, e.g. "border-l-primary", "border-l-green-500"
   span?: 1 | 2; // grid-column span — 2 for "hero" widgets
   onMenuClick?: () => void;
   children: ReactNode;
@@ -14,6 +15,7 @@ interface WidgetCardProps {
 export function WidgetCard({
   title,
   dotColor = "bg-primary",
+  accentColor = "border-l-transparent",
   span = 1,
   onMenuClick,
   children,
@@ -23,6 +25,8 @@ export function WidgetCard({
     <div
       className={cn(
         "bg-card border border-border/60 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow",
+        "border-l-4",
+        accentColor,
         span === 2 && "col-span-2",
         className
       )}
