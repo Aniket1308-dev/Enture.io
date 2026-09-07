@@ -25,7 +25,7 @@ export function TableViewWidget() {
   const devices = devicesTable.length > 0 ? devicesTable : mockDevices;  
 
   return (
-    <WidgetCard title="Devices" dotColor="bg-primary" span={2}>
+    <WidgetCard title="Devices" dotColor="bg-primary" accentColor="border-l-amber-500" span={2}>
       <table className="w-full text-sm">
         <thead>
           <tr className="text-left text-xs text-muted-foreground uppercase tracking-wide border-b border-border/60">

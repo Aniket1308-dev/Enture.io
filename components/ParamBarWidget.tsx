@@ -23,7 +23,7 @@ const mockBarData = [
 
 export function ParamBarWidget() {
   return (
-    <WidgetCard title="Parameter (Bar)" dotColor="bg-primary">
+    <WidgetCard title="Parameter (Bar)" dotColor="bg-primary" accentColor="border-l-indigo-500">
       <div className="h-40 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={mockBarData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>

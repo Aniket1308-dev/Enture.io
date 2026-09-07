@@ -9,7 +9,7 @@ const statusItems = [
 
 export function SldDiagramWidget() {
   return (
-    <WidgetCard title="SLD Diagram" dotColor="bg-primary">
+    <WidgetCard title="SLD Diagram" dotColor="bg-primary" accentColor="border-l-emerald-500">
       <div className="flex flex-col items-center justify-center py-6 gap-3">
         <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center">
           <Zap className="h-7 w-7 text-primary" />

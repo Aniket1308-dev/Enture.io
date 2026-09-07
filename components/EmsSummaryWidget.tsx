@@ -49,7 +49,7 @@ export function EmsSummaryWidget() {
     : mockMetrics;
 
   return (
-    <WidgetCard title="EMS Summary" dotColor="bg-primary">
+    <WidgetCard title="EMS Summary" dotColor="bg-primary" accentColor="border-l-primary">
       <div className="grid grid-cols-3 gap-4">
         {metrics.map((metric) => {
           const numericValue = parseFloat(metric.value) || 0;

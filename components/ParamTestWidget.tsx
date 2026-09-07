@@ -23,7 +23,7 @@ export function ParamTestWidget() {
   const latestValue = chartData[chartData.length - 1]?.value ?? 0;  
 
   return (
-    <WidgetCard title="Parameter trend" dotColor="bg-primary">
+    <WidgetCard title="Parameter trend" dotColor="bg-primary" accentColor="border-l-violet-500">
       <div className="flex items-baseline gap-2 mb-3">
         <span className="text-2xl font-semibold">{latestValue.toFixed(1)}</span>
         <span className="text-sm text-muted-foreground">units</span>
