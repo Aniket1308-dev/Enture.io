@@ -2,7 +2,16 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, SlidersHorizontal, MoreVertical, ChevronDown } from "lucide-react";
+import {
+  Plus,
+  SlidersHorizontal,
+  MoreVertical,
+  ChevronDown,
+  LayoutGrid,
+  Table as TableIcon,
+  Waypoints,
+  type LucideIcon,
+} from "lucide-react";
 import { ConsumptionWidget } from "@/components/ConsumptionWidget";
 import { cn } from "@/lib/utils";
 import { ParamTestWidget } from "@/components/ParamTestWidget";
@@ -12,13 +21,20 @@ import { TableViewWidget } from "@/components/TableViewWidget";
 import { SldDiagramWidget } from "@/components/SldDiagramWidget";
 
 const mockViews = [
-  { id: 1, name: "EMS View", type: "table" },
+  { id: 1, name: "EMS View", type: "grid" },
   { id: 2, name: "Table view", type: "table" },
   { id: 3, name: "Test Table view", type: "table" },
   { id: 4, name: "Kannadhasan Test Widget", type: "grid" },
   { id: 5, name: "Diagram View", type: "diagram" },
   { id: 6, name: "SLD Diagram view", type: "diagram" },
 ];
+
+// Maps each view's "type" to the icon shown in its tab, matching the original Enture app
+const viewTypeIcons: Record<string, LucideIcon> = {
+  grid: LayoutGrid,
+  table: TableIcon,
+  diagram: Waypoints,
+};
 
 // How many tabs show directly in the row before the rest collapse into "More"
 const VISIBLE_TAB_COUNT = 4;
@@ -60,17 +76,19 @@ export default function DashboardPage() {
       <div className="flex items-center gap-2 border-b pb-2 mb-4">
         {visibleTabs.map((v) => {
           const isActive = v.id === activeId;
+          const Icon = viewTypeIcons[v.type];
           return (
             <button
               key={v.id}
               onClick={() => setActiveId(v.id)}
               className={cn(
-                "px-3 py-1.5 text-sm rounded-md transition-colors",
+                "flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md transition-colors",
                 isActive
                   ? "bg-primary text-primary-foreground"
                   : "hover:bg-accent hover:text-accent-foreground"
               )}
             >
+              {Icon && <Icon className="h-3.5 w-3.5" />}
               {v.name}
             </button>
           );
@@ -104,6 +122,7 @@ export default function DashboardPage() {
                 <div className="absolute left-0 top-full mt-1 z-20 min-w-[200px] rounded-md border bg-popover text-popover-foreground shadow-md py-1">
                   {overflowTabs.map((v) => {
                     const isActive = v.id === activeId;
+                    const Icon = viewTypeIcons[v.type];
                     return (
                       <button
                         key={v.id}
@@ -112,12 +131,13 @@ export default function DashboardPage() {
                           setMoreOpen(false);
                         }}
                         className={cn(
-                          "w-full text-left px-3 py-1.5 text-sm transition-colors",
+                          "w-full flex items-center gap-1.5 text-left px-3 py-1.5 text-sm transition-colors",
                           isActive
                             ? "bg-primary text-primary-foreground"
                             : "hover:bg-accent hover:text-accent-foreground"
                         )}
                       >
+                        {Icon && <Icon className="h-3.5 w-3.5" />}
                         {v.name}
                       </button>
                     );
