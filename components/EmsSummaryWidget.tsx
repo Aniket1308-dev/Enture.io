@@ -22,6 +22,12 @@ function alertBadgeClasses(count: number) {
   return "bg-destructive/15 text-destructive";
 }
 
+function progressBarClasses(value: number) {
+  if (value >= 90) return "bg-green-500";
+  if (value >= 75) return "bg-amber-500";
+  return "bg-destructive";
+}
+
 export function EmsSummaryWidget() {
   const { emsSummary } = useSocketData();
 
@@ -74,7 +80,9 @@ export function EmsSummaryWidget() {
                   </span>
                   <div className="mt-2 h-1.5 w-full rounded-full bg-muted overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-primary transition-all duration-500"
+                      className={`h-full rounded-full transition-all duration-500 ${progressBarClasses(
+                        numericValue
+                      )}`}
                       style={{ width: `${Math.min(Math.max(numericValue, 0), 100)}%` }}
                     />
                   </div>
