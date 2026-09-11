@@ -50,7 +50,7 @@ export default function LoginPage() {
       >
         <div>
           <h1 className="text-3xl font-bold">
-            Enture<span className="align-super text-xs ml-1">TM</span>
+            Veyra<span className="align-super text-xs ml-1">TM</span>
           </h1>
           <p className="text-xs tracking-widest text-purple-200 mt-1">
             INDUSTRIAL IOT PLATFORM
@@ -69,7 +69,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <p className="text-xs text-purple-300">© 2026 Nebeskie Labs</p>
+        <p className="text-xs text-purple-300">© 2026 Veyra Labs</p>
       </div>
 
       {/* Right form panel */}
@@ -123,7 +123,7 @@ export default function LoginPage() {
           </p>
 
           <p className="text-center text-xs text-muted-foreground mt-6">
-            Powered by Nebeskie Labs · Enture™
+            Powered by Veyra Labs · Veyra™
           </p>
         </div>
       </div>
