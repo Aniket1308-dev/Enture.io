@@ -4,6 +4,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Theme translation layer — maps CSS variables below to Tailwind utility classes.
+   This block does NOT define colors itself; it just exposes --background etc.
+   as bg-background, text-foreground, etc. Actual values live in :root / .dark. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,30 +52,46 @@
 }
 
 :root {
+  /* Base surface & text colors — neutral steel-gray, hue 260 */
   --background: oklch(0.98 0.008 260);
   --foreground: oklch(0.145 0.01 260);
   --card: oklch(1 0.004 260);
   --card-foreground: oklch(0.145 0.01 260);
   --popover: oklch(1 0.004 260);
   --popover-foreground: oklch(0.145 0.01 260);
+
+  /* Brand accent — purple. Do not change without design sign-off. */
   --primary: oklch(0.496 0.265 301.924);       /* purple-700 */
   --primary-foreground: oklch(0.985 0 0);       /* white */
+
+  /* Secondary / muted surfaces — neutral steel-gray */
   --secondary: oklch(0.94 0.012 260);
   --secondary-foreground: oklch(0.205 0.014 260);
   --muted: oklch(0.94 0.012 260);
   --muted-foreground: oklch(0.52 0.02 260);
+
+  /* Accent wash — purple, tied to brand accent above */
   --accent: oklch(0.946 0.033 307.174);         /* purple-100 wash */
   --accent-foreground: oklch(0.381 0.176 304.987); /* purple-900 */
+
+  /* Status color */
   --destructive: oklch(0.577 0.245 27.325);
+
+  /* Borders, inputs, focus ring */
   --border: oklch(0.87 0.014 260);
   --input: oklch(0.87 0.014 260);
   --ring: oklch(0.627 0.265 303.9);             /* purple-500, for focus rings */
+
+  /* Chart palette — currently flat grayscale (chroma 0), optional future decision */
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+
   --radius: 0.625rem;
+
+  /* Sidebar tokens — neutral steel-gray, accent tied to brand purple */
   --sidebar: oklch(0.96 0.008 260);
   --sidebar-foreground: oklch(0.205 0.014 260);
   --sidebar-primary: oklch(0.496 0.265 301.924);
@@ -84,29 +103,44 @@
 }
 
 .dark {
+  /* Base surface & text colors — neutral steel-gray, hue 260 */
   --background: oklch(0.16 0.014 260);
   --foreground: oklch(0.985 0.006 260);
   --card: oklch(0.22 0.016 260);
   --card-foreground: oklch(0.985 0.006 260);
   --popover: oklch(0.22 0.016 260);
   --popover-foreground: oklch(0.985 0.006 260);
+
+  /* Brand accent — purple. Do not change without design sign-off. */
   --primary: oklch(0.627 0.265 303.9);          /* purple-500, lighter for dark bg */
   --primary-foreground: oklch(0.145 0 0);
+
+  /* Secondary / muted surfaces — neutral steel-gray */
   --secondary: oklch(0.28 0.018 260);
   --secondary-foreground: oklch(0.985 0.006 260);
   --muted: oklch(0.28 0.018 260);
   --muted-foreground: oklch(0.68 0.02 260);
+
+  /* Accent wash — purple, tied to brand accent above */
   --accent: oklch(0.438 0.218 303.724);         /* purple-800 wash */
   --accent-foreground: oklch(0.985 0 0);
+
+  /* Status color */
   --destructive: oklch(0.704 0.191 22.216);
+
+  /* Borders, inputs, focus ring */
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.627 0.265 303.9);
+
+  /* Chart palette — currently flat grayscale (chroma 0), optional future decision */
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+
+  /* Sidebar tokens — neutral steel-gray, accent tied to brand purple */
   --sidebar: oklch(0.22 0.016 260);
   --sidebar-foreground: oklch(0.985 0.006 260);
   --sidebar-primary: oklch(0.627 0.265 303.9);
