@@ -149,15 +149,17 @@ export default function DashboardPage() {
         )}
       </div>
 
-      <div className="mt-6 grid grid-cols-3 gap-4">
-        <ConsumptionWidget />
-        <ParamTestWidget />
-        <ParamBarWidget />
-        <EmsSummaryWidget />
-        <TableViewWidget />
-        <SldDiagramWidget />
-        {/* remaining 5 widgets will go here in later steps */}
-      </div>
+  <div className="mt-6 grid grid-cols-3 gap-4">
+    <ConsumptionWidget />
+    <ParamTestWidget />
+    <ParamBarWidget />
+    <EmsSummaryWidget />
+    <TableViewWidget />
+    <div className="col-span-2">
+      <SldDiagramWidget />
+    </div>
+    {/* remaining 5 widgets will go here in later steps */}
+  </div>
       {/* selected view content goes here later */}
     </div>
   );

@@ -80,7 +80,7 @@ export function SldDiagramWidget() {
 
   return (
     <WidgetCard title="SLD Diagram" dotColor="bg-primary" accentColor="border-l-emerald-500">
-      <div className="h-56 w-full rounded-lg border border-border/60 overflow-hidden">
+      <div className="h-72 w-full rounded-lg border border-border/60 overflow-hidden">
         <ReactFlow
           nodes={nodes}
           edges={edges}
