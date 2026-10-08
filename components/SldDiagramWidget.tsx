@@ -5,6 +5,7 @@ import {
   ReactFlow,
   Background,
   Controls,
+  Position,
   type Node,
   type Edge,
 } from "@xyflow/react";
@@ -26,51 +27,68 @@ const nodeStyle = {
   padding: "8px 12px",
 };
 
+const handlePositions = {
+  sourcePosition: Position.Right,
+  targetPosition: Position.Left,
+};
+
 const initialNodes: Node[] = [
   {
     id: "transformer",
     position: { x: 0, y: 60 },
     data: { label: "Transformer" },
     style: nodeStyle,
+    ...handlePositions,
   },
   {
     id: "breaker",
     position: { x: 180, y: 60 },
     data: { label: "Breaker" },
     style: nodeStyle,
+    ...handlePositions,
   },
   {
     id: "meter",
     position: { x: 360, y: 60 },
     data: { label: "Meter" },
     style: nodeStyle,
+    ...handlePositions,
   },
   {
     id: "load",
     position: { x: 540, y: 60 },
     data: { label: "Load" },
     style: { ...nodeStyle, border: "1px solid var(--primary)" },
+    ...handlePositions,
   },
 ];
+
+const edgeStyle = { stroke: "var(--primary)", strokeWidth: 1.5 };
 
 const initialEdges: Edge[] = [
   {
     id: "e-transformer-breaker",
     source: "transformer",
     target: "breaker",
-    style: { stroke: "var(--border)" },
+    type: "smoothstep",
+    animated: true,
+    style: edgeStyle,
   },
   {
     id: "e-breaker-meter",
     source: "breaker",
     target: "meter",
-    style: { stroke: "var(--border)" },
+    type: "smoothstep",
+    animated: true,
+    style: edgeStyle,
   },
   {
     id: "e-meter-load",
     source: "meter",
     target: "load",
-    style: { stroke: "var(--border)" },
+    type: "smoothstep",
+    animated: true,
+    style: edgeStyle,
   },
 ];
 
@@ -85,6 +103,7 @@ export function SldDiagramWidget() {
           nodes={nodes}
           edges={edges}
           fitView
+          fitViewOptions={{ padding: 0.2 }}
           nodesDraggable
           nodesConnectable={false}
           zoomOnScroll={false}
